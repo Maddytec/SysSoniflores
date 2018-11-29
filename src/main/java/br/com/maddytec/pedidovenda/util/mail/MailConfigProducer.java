@@ -13,7 +13,7 @@ public class MailConfigProducer {
 	
 	@Produces
 	@ApplicationScoped
-	public  SessionConfig getMailConfig() throws IOException{
+	public  SessionConfig getMailConfig() throws IOException {
 		Properties props = new Properties();
 		props.load(getClass().getResourceAsStream("/mail_soniflores.properties"));
 		

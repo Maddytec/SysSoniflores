@@ -17,6 +17,10 @@
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -37,6 +41,9 @@
 			<artifactId>poi</artifactId>
 			<version>3.13</version>
 		</dependency>
+
+
+
 
 		<!-- Implementacao do Bean Validation -->
 		<dependency>
@@ -152,10 +159,11 @@
 
 		<!-- Abstração para envio de e-mails -->
 		<dependency>
-			<groupId>simple-email</groupId>
-			<artifactId>simple-email</artifactId>
-			<version>1.0.0</version>
-		</dependency>
+	        <groupId>com.github.codylerum</groupId>
+	        <artifactId>simple-email</artifactId>
+	        <version>83e1654e69</version>
+			<scope>compile</scope>
+	    </dependency>
 
 		<!-- Requerido para envio de e-mails -->
 		<dependency>
@@ -220,7 +228,6 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-
 
 	</dependencies>
 

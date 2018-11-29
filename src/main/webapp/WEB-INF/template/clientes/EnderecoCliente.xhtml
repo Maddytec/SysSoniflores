@@ -6,13 +6,13 @@
 
 
 	<script>
-/*Função responsavel por fechar o dialog após a inclusão do endereco*/
-function tratarInclusaoEndereco(args){
-	if(!args.validationFailed){
-		PF('inclusaoEnderecoDialog').hide();
+		/*Função responsavel por fechar o dialog após a inclusão do endereco*/
+		function tratarInclusaoEndereco(args) {
+			if (!args.validationFailed) {
+				PF('inclusaoEnderecoDialog').hide();
+			}
 		}
-}
-</script>
+	</script>
 
 	<p:panelGrid columns="1" id="painelEndereco">
 		<p:button value="Adicionar endereço" style="margin-top: 20px"
@@ -76,11 +76,24 @@ function tratarInclusaoEndereco(args){
 	<p:dialog header="Inclusão de endereco" id="enderecoDialog"
 		widgetVar="inclusaoEnderecoDialog" modal="true" resizable="false">
 
+		<p:growl id="growl" showSummary="true" />
+
 		<h:panelGroup id="inclusaoPanel">
 
 			<p:messages autoUpdate="false" closable="true" id="msgDialog" />
 
 			<h:panelGrid columns="2">
+
+				<p:outputLabel value="CEP" for="cep" />
+
+				<p:panelGrid id="pnCep" columns="3">
+					<p:inputMask id="cep" style="width: 80px" mask="99999999"
+						value="#{cadastroEnderecoBean.endereco.cep}"></p:inputMask>
+					<p:commandButton id="btPesquisar" value="Pesquisar"
+						icon="ui-icon-search"
+						action="#{cadastroEnderecoBean.pesquisarCep}"
+						update=":frm:inclusaoPanel" process="cep @this" />
+				</p:panelGrid>
 
 				<p:outputLabel value="Logradouro" for="logradouro" />
 				<p:inputText id="logradouro" style="width: 250px"
@@ -89,7 +102,9 @@ function tratarInclusaoEndereco(args){
 
 				<p:outputLabel value="Número" for="numeroEndereco" />
 				<p:inputText id="numeroEndereco" style="width: 50px"
-					value="#{cadastroEnderecoBean.endereco.numero}" />
+					value="#{cadastroEnderecoBean.endereco.numero}">
+					<p:ajax update=":frm:inclusaoPanel" process=":frm:inclusaoPanel" />
+				</p:inputText>
 
 				<p:outputLabel value="Bairro" for="bairro" />
 				<p:inputText id="bairro" style="width: 150px"
@@ -98,10 +113,6 @@ function tratarInclusaoEndereco(args){
 				<p:outputLabel value="Complemento" for="complemento" />
 				<p:inputText id="complemento" style="width: 150px"
 					value="#{cadastroEnderecoBean.endereco.complemento}" />
-
-				<p:outputLabel value="CEP" for="cep" />
-				<p:inputMask id="cep" style="width: 80px" mask="99999999"
-					value="#{cadastroEnderecoBean.endereco.cep}" />
 
 				<p:outputLabel value="Cidade" for="cidade" />
 				<h:panelGroup>
@@ -116,11 +127,11 @@ function tratarInclusaoEndereco(args){
 			</h:panelGrid>
 
 			<p:commandButton value="Incluir"
-				action="#{cadastroEnderecoBean.adicionar()}" id="incluir"
+				action="#{cadastroEnderecoBean.adicionar}" id="incluir"
 				update=":frm:enderecosTable :frm:inclusaoPanel"
-				process="@this :frm:inclusaoPanel"
-				oncomplete="tratarInclusaoEndereco(args)" />
-
+				process=":frm:inclusaoPanel"
+				oncomplete="tratarInclusaoEndereco(args)"
+				disabled="#{cadastroEnderecoBean.endereco.numero == null }" />
 		</h:panelGroup>
 	</p:dialog>
 
@@ -153,7 +164,7 @@ function tratarInclusaoEndereco(args){
 				<p:outputLabel value="Bairro" for="bairroEdicao" />
 				<p:inputText id="bairroEdicao" size="100" maxlength="150"
 					value="#{cadastroEnderecoBean.enderecoAEditar.bairro}" />
-					
+
 				<p:outputLabel value="Complemento" for="complementoEdicao" />
 				<p:inputText id="complementoEdicao" size="100" maxlength="150"
 					value="#{cadastroEnderecoBean.enderecoAEditar.complemento}" />
