@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.Session;
 
+import br.com.maddytec.pedidovenda.model.Pedido;
 import br.com.maddytec.pedidovenda.util.jsf.FacesUtil;
 import br.com.maddytec.pedidovenda.util.report.ExecutorRelatorio;
 
@@ -40,9 +41,17 @@ public class RelatorioPedidosBean implements Serializable {
 
 	@Inject
 	private EntityManager manager;
+	
+	@Inject
+	@PedidoEdicao
+	private Pedido pedido;
 
 	public void emitir(String caminhoDoRelatorio, String nomeDoRelatorio) throws ParseException {
 
+		if(this.pedido.getId() != null) {
+			pedidoId = this.pedido.getId();
+		}
+				
 		Date date = new Date();
 		DateFormat df = new SimpleDateFormat("dd/MM/YYYY_HH:mm:ss");
 		String dataFormatada = df.format(date);
@@ -53,6 +62,29 @@ public class RelatorioPedidosBean implements Serializable {
 		parametros.put("pedido_id", this.pedidoId);
 		parametros.put("cliente", this.nomeCliente);
 
+		ExecutorRelatorio executor = new ExecutorRelatorio(caminhoDoRelatorio,
+				this.response, parametros, nomeDoRelatorio+"_"+dataFormatada+".pdf");
+
+		Session session = manager.unwrap(Session.class);
+		session.doWork(executor);
+
+		if (executor.isRelatorioGerado()) {
+			facesContext.responseComplete();
+		} else {
+			FacesUtil
+					.addErrorMessage("A execução do relatório não retornou dados.");
+		}
+	}
+	
+	public void emitir(String caminhoDoRelatorio, String nomeDoRelatorio, Pedido pedido) throws ParseException {
+
+		Date date = new Date();
+		DateFormat df = new SimpleDateFormat("dd/MM/YYYY_HH:mm:ss");
+		String dataFormatada = df.format(date);
+				
+		Map<String, Object> parametros = new HashMap<>();
+		parametros.put("pedido_id", pedido.getId());
+		
 		ExecutorRelatorio executor = new ExecutorRelatorio(caminhoDoRelatorio,
 				this.response, parametros, nomeDoRelatorio+"_"+dataFormatada+".pdf");
 

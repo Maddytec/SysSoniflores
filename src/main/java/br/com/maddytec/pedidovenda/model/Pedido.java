@@ -327,4 +327,9 @@ public class Pedido implements Serializable {
 		return this.isNovo() || this.isCancelado() || this.isBaixado();
 	}
 	
+	@Transient
+	public boolean isNaoImprimir(){
+		return this.isNovo() || this.isCancelado() || this.isBaixado();
+	}
+	
 }

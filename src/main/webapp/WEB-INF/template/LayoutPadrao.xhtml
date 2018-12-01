@@ -39,24 +39,22 @@
 		<h:form style="display: inline-block">
 			<p:menubar styleClass="menu-sistema">
 				<p:submenu label="Cadastros">
-					<p:menuitem value="Clientes" outcome="/clientes/PesquisaClientes" />
-					<p:menuitem value="Usuários" outcome="/usuarios/PesquisaUsuarios" />
-					<p:menuitem value="Grupo de Usuário"
+					<p:menuitem icon="ui-icon-heart" value="Clientes" outcome="/clientes/PesquisaClientes" />
+					<p:menuitem icon="ui-icon-person" value="Usuários" outcome="/usuarios/PesquisaUsuarios" />
+					<p:menuitem icon="ui-icon-copy" value="Grupo de Usuário"
 						outcome="/grupos/PesquisaGrupos" />
 					<p:separator />
 						<p:submenu label="Categorias">
-							<p:menuitem value="Categorias" outcome="/categorias/PesquisaCategorias" />
-							<p:menuitem value="Subcategorias" outcome="/categorias/PesquisaSubcategorias" />						
+							<p:menuitem icon="ui-icon-folder-open" value="Categorias" outcome="/categorias/PesquisaCategorias" />
+							<p:menuitem icon="ui-icon-folder-collapsed" value="Subcategorias" outcome="/categorias/PesquisaSubcategorias" />						
 						</p:submenu>
 					
-					<p:menuitem value="Produtos" outcome="/produtos/PesquisaProdutos" />
+					<p:menuitem icon="ui-icon-suitcase" value="Produtos" outcome="/produtos/PesquisaProdutos" />
 				</p:submenu>
 				<p:submenu label="Pedidos">
-					<p:menuitem value="Novo pedido" outcome="/pedidos/CadastroPedido" />
-					<p:menuitem value="Pesquisa pedido"
+					<p:menuitem icon="ui-icon-cart" value="Novo pedido" outcome="/pedidos/CadastroPedido" />
+					<p:menuitem icon="ui-icon-search" value="Pesquisa pedido"
 						outcome="/pedidos/PesquisaPedidos" />
-					<p:menuitem value="Gráfico"
-						outcome="/pedidos/Grafico" />
 				</p:submenu>
 				<p:submenu label="Relatórios">
 					<p:menuitem value="Pedidos emitidos" outcome="/relatorios/RelatorioPedidosEmitidos" />

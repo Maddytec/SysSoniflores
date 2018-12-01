@@ -57,9 +57,9 @@
 						value="#{pesquisaPedidosBean.filtro.dataEntregaAte}"
 						pattern="dd/MM/yyyy" locale="pt_BR" mask="99/99/9999" />
 				</h:panelGroup>
-				
-				
-				
+
+
+
 
 				<p:outputLabel value="Vendedor" />
 				<p:inputText value="#{pesquisaPedidosBean.filtro.nomeVendedor}"
@@ -115,11 +115,12 @@
 					</h:outputText>
 				</p:column>
 
-				<p:column headerText="Status" style="width: 70px" sortBy="#{pedido.status}">
+				<p:column headerText="Status" style="width: 70px"
+					sortBy="#{pedido.status}">
 					<h:outputText value="#{pedido.status.descricao}" />
 				</p:column>
 
-				<p:column style="text-align: center; width: 80px" exportable="false">
+				<p:column style="text-align: center; width: 120px" exportable="false">
 					<p:button icon="ui-icon-pencil" title="Editar"
 						outcome="/pedidos/CadastroPedido"
 						disabled="#{not seguranca.baixarPedidoPermitido or pedido.status != 'ORCAMENTO'}">
@@ -127,6 +128,10 @@
 						<f:event listener="#{cadastroPedidoBean.isEditando}"
 							type="preRenderView" />
 					</p:button>
+
+					<p:commandButton icon="ui-icon-print" title="Imprimir"
+						action="#{relatorioPedidosBean.emitir('/relatorios/pedidos_por_codigo.jasper', 'Pedidos_por_codigo', pedido)}"
+						ajax="false" />
 
 					<p:button icon="ui-icon-circle-arrow-s" title="Baixar"
 						outcome="/pedidos/CadastroPedido"

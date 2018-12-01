@@ -3,12 +3,17 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-	<display-name>SysSoniflores</display-name>
+	<display-name>soniflores</display-name>
 	
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>sunny</param-value>
 	</context-param>
+	
+	<context-param>
+        <param-name>maxSize</param-name>
+        <param-value>100000</param-value>
+    </context-param>
 	
 	<context-param>
 		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
